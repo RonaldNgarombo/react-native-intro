@@ -1,46 +1,40 @@
-import Animated, {
-  useSharedValue,
-  withTiming,
-  useAnimatedStyle,
-  Easing,
-} from "react-native-reanimated";
-import { View, Button } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import Screen1 from "./src/screens/Screen1";
+import Screen2 from "./src/screens/Screen2";
+import Screen3 from "./src/screens/Screen3";
+import Screen4 from "./src/screens/Screen4";
+import Screen5 from "./src/screens/Screen5";
+import Screen6 from "./src/screens/Screen6";
+import Screen7 from "./src/screens/Screen7";
 
-export default function AnimatedStyleUpdateExample(props) {
-  const randomWidth = useSharedValue(10);
+import { useState } from "react";
 
-  const config = {
-    duration: 500,
-    easing: Easing.bezier(0.5, 0.01, 0, 1),
-  };
+export default function App() {
+  const [tab, setTab] = useState(1);
 
-  const style = useAnimatedStyle(() => {
-    return {
-      width: withTiming(randomWidth.value, config),
-    };
-  });
-
+  //
+  //
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
-      }}
-    >
-      <Animated.View
-        style={[
-          { width: 100, height: 80, backgroundColor: "black", margin: 30 },
-          style,
-        ]}
-      />
-      <Button
-        title="toggle"
-        onPress={() => {
-          randomWidth.value = Math.random() * 350;
-        }}
-      />
+    <View style={styles.container}>
+      {tab === 1 && <Screen1 tab={tab} setTab={setTab} />}
+
+      {tab === 2 && <Screen2 tab={tab} setTab={setTab} />}
+
+      {tab === 3 && <Screen3 tab={tab} setTab={setTab} />}
+
+      {tab === 4 && <Screen4 tab={tab} setTab={setTab} />}
+
+      {tab === 5 && <Screen5 tab={tab} setTab={setTab} />}
+
+      {tab === 6 && <Screen6 tab={tab} setTab={setTab} />}
+
+      {tab === 7 && <Screen7 tab={tab} setTab={setTab} />}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
